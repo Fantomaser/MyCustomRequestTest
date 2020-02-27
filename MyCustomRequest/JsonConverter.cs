@@ -12,7 +12,7 @@ namespace MyCustomRequest
     public class JsonConverter
     {
         Logger logger;
-        public JsonConverter(Logger _logger) { logger = _logger }
+        public JsonConverter(Logger _logger) { logger = _logger; }
 
         public async void MakeJsonToTxt()
         {
