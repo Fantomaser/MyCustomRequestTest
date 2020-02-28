@@ -3,8 +3,6 @@ using System.Text;
 using System.Net;
 using System.IO;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Xml.Serialization;
 using MyCustomRequest.DB;
 
@@ -19,12 +17,12 @@ namespace MyCustomRequest
             db = _db;
         }
 
-        public async void MakeErrorCodesRequest()
+        public void MakeErrorCodesRequest()
         {
             WebRequest request = WebRequest.Create("https://pastebin.com/raw/JK7WiMax");
             request.Method = "GET";
 
-            WebResponse response = await request.GetResponseAsync();
+            WebResponse response = request.GetResponse();
             string ReqText = string.Empty;
 
             using (Stream stream = response.GetResponseStream())
@@ -44,9 +42,10 @@ namespace MyCustomRequest
                     var p1 = new System.Data.SqlClient.SqlParameter("@newcode", c.Id);
                     var p2 = new System.Data.SqlClient.SqlParameter("@newtext", Encoding.Unicode.GetString(unicodeBytes));
 
-                    await db.Database.ExecuteSqlCommandAsync("dbo.SetError @newcode, @newtext", p1, p2);
-
+                    db.UseToken.WaitOne();
+                    db.Database.ExecuteSqlCommand("dbo.SetError @newcode, @newtext", p1, p2);
                     db.SaveChanges();
+                    db.UseToken.ReleaseMutex();
                     
                 }
                 Console.WriteLine("End process");
@@ -57,12 +56,12 @@ namespace MyCustomRequest
             Console.WriteLine(ReqText);
         }
 
-        public async void MakeCategoriesRequest()
+        public void MakeCategoriesRequest()
         {
             WebRequest request = WebRequest.Create("https://pastebin.com/raw/0RpLbQ19");
             request.Method = "GET";
 
-            WebResponse response = await request.GetResponseAsync();
+            WebResponse response = request.GetResponse();
             string ReqText = string.Empty;
 
             using (Stream stream = response.GetResponseStream())
@@ -91,9 +90,11 @@ namespace MyCustomRequest
                     var p3 = new System.Data.SqlClient.SqlParameter("@newparent", c.parent);
                     var p4 = new System.Data.SqlClient.SqlParameter("@newimage", Encoding.Unicode.GetString(unicodeBytes2));
 
-                    await db.Database.ExecuteSqlCommandAsync("dbo.SetCategory @newcid, @newname, @newparent, @newimage", p1, p2, p3, p4);
-
+                    db.UseToken.WaitOne();
+                    db.Database.ExecuteSqlCommand("dbo.SetCategory @newcid, @newname, @newparent, @newimage", p1, p2, p3, p4);
                     db.SaveChanges();
+                    db.UseToken.ReleaseMutex();
+
 
                 }
                 Console.WriteLine("End process");

@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 
 namespace MyCustomRequest
@@ -15,7 +11,7 @@ namespace MyCustomRequest
     }
 
 
-    public class Logger
+    public class Logger: IDisposable
     {
         bool IsDisposed = false; 
         StreamWriter file;
@@ -61,7 +57,13 @@ namespace MyCustomRequest
             }
         }
 
-        
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+
         ~Logger()
         {
             Dispose(false);

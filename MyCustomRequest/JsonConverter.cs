@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json.Serialization;
 using System.Text.Json;
@@ -39,7 +35,7 @@ namespace MyCustomRequest
 
                     foreach (var user in users)
                     {
-                        string userInfo = user.FullName + ";\n" + user.Country + ";\n" + user.CreatedAt.ToString() + ";\n" + user.Id.ToString() + ";\n" + user.Email + ";\n";
+                        string userInfo = user.FullName + ";" + user.Country + ";" + user.CreatedAt.ToString() + ";" + user.Id.ToString() + ";" + user.Email + ";";
 
                         await fDestination.WriteLineAsync(userInfo.ToCharArray(), 0, userInfo.Length);
                         userCount++;

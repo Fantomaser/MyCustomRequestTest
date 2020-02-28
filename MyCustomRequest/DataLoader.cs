@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using MyCustomRequest.DB;
 
 namespace MyCustomRequest
@@ -17,7 +13,11 @@ namespace MyCustomRequest
         {
             string result = string.Empty;
 
-            var _category = db.Database.SqlQuery<category>("ShowData");
+            db.UseToken.WaitOne();
+            var _category = db.Database.SqlQuery<category>("ShowData").ToList();
+            db.UseToken.ReleaseMutex();
+            if (_category.Count() < 1)
+                return "------------------- NO DATA ----------------------";
             foreach(var cat in _category)
             {
                 result += $"{cat.Id}  {cat.parent, 10}  {cat.name, 30}  {cat.image, 70} " + " \n";

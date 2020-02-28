@@ -1,10 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -54,25 +49,33 @@ namespace MyCustomRequest
         private void GetErrors_Click(object sender, EventArgs e)
         {
             logger.LogToFile("Program Get Errors Request", msgState.Info);
-            reqSender.MakeErrorCodesRequest();
+            Task task3 = Task.Run(() => reqSender.MakeErrorCodesRequest());
         }
 
         private void Categories_Click(object sender, EventArgs e)
         {
             logger.LogToFile("Program Get Categories Request", msgState.Info);
-            reqSender.MakeCategoriesRequest();
+            Task task2 = Task.Run(() => reqSender.MakeCategoriesRequest());
         }
 
         private void MakeJson_Click(object sender, EventArgs e)
         {
             logger.LogToFile("Program Make Json", msgState.Info);
-            jsonConverter.MakeJsonToTxt();
+            Task task = Task.Run(() => jsonConverter.MakeJsonToTxt());
         }
 
         private void ShowCategories_Click(object sender, EventArgs e)
         {
             logger.LogToFile("Program Show Category", msgState.Info);
             this.richTextBox1.Text = dataLoader.ShowData();
+        }
+
+        private void MakeAll_Click(object sender, EventArgs e)
+        {
+            logger.LogToFile("Program Start Multi Call", msgState.Info);
+            Task task = Task.Run(() => jsonConverter.MakeJsonToTxt());
+            Task task2 = Task.Run(() => reqSender.MakeCategoriesRequest());
+            Task task3 = Task.Run(() => reqSender.MakeErrorCodesRequest());
         }
     }
 }

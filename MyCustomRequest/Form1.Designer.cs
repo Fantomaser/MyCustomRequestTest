@@ -23,6 +23,7 @@
             this.MakeJson = new System.Windows.Forms.Button();
             this.ShowCategories = new System.Windows.Forms.Button();
             this.richTextBox1 = new System.Windows.Forms.RichTextBox();
+            this.MakeAll = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -83,7 +84,7 @@
             this.Categories.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.Categories.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
             this.Categories.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.Categories.Location = new System.Drawing.Point(335, 43);
+            this.Categories.Location = new System.Drawing.Point(235, 43);
             this.Categories.Name = "Categories";
             this.Categories.Size = new System.Drawing.Size(121, 23);
             this.Categories.TabIndex = 4;
@@ -96,7 +97,7 @@
             this.MakeJson.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.MakeJson.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
             this.MakeJson.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.MakeJson.Location = new System.Drawing.Point(587, 43);
+            this.MakeJson.Location = new System.Drawing.Point(439, 43);
             this.MakeJson.Name = "MakeJson";
             this.MakeJson.Size = new System.Drawing.Size(121, 23);
             this.MakeJson.TabIndex = 5;
@@ -126,12 +127,26 @@
             this.richTextBox1.TabIndex = 8;
             this.richTextBox1.Text = "";
             // 
+            // MakeAll
+            // 
+            this.MakeAll.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.MakeAll.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(125)))), ((int)(((byte)(125)))), ((int)(((byte)(125)))));
+            this.MakeAll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.MakeAll.Location = new System.Drawing.Point(624, 43);
+            this.MakeAll.Name = "MakeAll";
+            this.MakeAll.Size = new System.Drawing.Size(121, 23);
+            this.MakeAll.TabIndex = 9;
+            this.MakeAll.Text = "Make All";
+            this.MakeAll.UseVisualStyleBackColor = false;
+            this.MakeAll.Click += new System.EventHandler(this.MakeAll_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(136)))), ((int)(((byte)(136)))), ((int)(((byte)(136)))));
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.MakeAll);
             this.Controls.Add(this.richTextBox1);
             this.Controls.Add(this.ShowCategories);
             this.Controls.Add(this.MakeJson);
@@ -158,6 +173,7 @@
         private System.Windows.Forms.Button MakeJson;
         private System.Windows.Forms.Button ShowCategories;
         private System.Windows.Forms.RichTextBox richTextBox1;
+        private System.Windows.Forms.Button MakeAll;
     }
 }
 

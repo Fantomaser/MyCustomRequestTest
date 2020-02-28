@@ -1,14 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Data.Entity;
+﻿using System.Data.Entity;
+using System.Threading;
 
 namespace MyCustomRequest.DB
 {
     public class DBModel : DbContext
     {
+        public Mutex UseToken = new Mutex();
+
         public DBModel() : base("DbConnection") { }
 
         public DbSet<category> Categories { get; set; }

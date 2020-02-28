@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Linq;
 using System.Windows.Forms;
 using MyCustomRequest.DB;
 
@@ -13,12 +10,13 @@ namespace MyCustomRequest
         {
             using (DBModel db = new DBModel())
             {
-
-                db.ErrorCodes.Add(new ErrorCode() { Id = 0, infotext = "ddd" });
-                db.SaveChanges();
                 db.ErrorCodes.RemoveRange(db.ErrorCodes.Select(c=>c));
                 db.SaveChanges();
                 db.Categories.RemoveRange(db.Categories.Select(c => c));
+                db.SaveChanges();
+                db.ErrorCodes.Add(new ErrorCode() { Id = 0, infotext = "ddd" });
+                db.SaveChanges();
+                db.ErrorCodes.RemoveRange(db.ErrorCodes.Select(c => c));
                 db.SaveChanges();
                 var logger = new Logger("Logfile.txt");
                 logger.LogToFile("Program start", msgState.OK);
